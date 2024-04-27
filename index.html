@@ -7,6 +7,7 @@
   <title>DAT Hourly Earnings Timer</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
+    @import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
 
     .martian-mono-dingus {
       font-family: "Martian Mono", monospace;
@@ -19,11 +20,11 @@
 
     body,
     html {
-      padding: 0.5em 1em;
       font-family: 'Martian Mono', monospace;
       font-size: 1em;
       color: white;
       background-color: black;
+      line-height: 2;
     }
 
     .c-div {
@@ -33,15 +34,27 @@
       padding: 1em;
     }
 
+    .c2-div {
+      width: 100%;
+      height: 2em;
+      font-family: 'Martian Mono', monospace;
+      font-size: 3em;
+      color: black;
+      text-align: center;
+      padding: 0.2em;
+      background-color: rgba(84, 151, 255, 1);
+    }
+
     #timer {
       font-size: 2em;
     }
 
     #earnings {
-      font-size: 2.5em;
+      font-size: 2em;
+      color:  rgba(84, 151, 255, 1);;
     }
 
-    .button-macos {
+    .button {
       padding: 0.5em 1em;
       font-family: 'Martian Mono', monospace;
       font-size: 1em;
@@ -55,13 +68,13 @@
       overflow: hidden;
     }
 
-    .button-macos:hover {
+    .button:hover {
       background-color: rgba(84, 151, 255, 1);
       color: black;
       overflow: hidden;
     }
 
-    .button-macos:focus {
+    .button:focus {
       background-color: rgba(84, 151, 255, 1);
       color: black;
       outline: none;
@@ -100,18 +113,26 @@
 </head>
 
 <body>
+
+  <div class="c2-div">
+    <div id="runningtotal">
+      🤑
+    </div>
+  </div>
+
   <div class="c-div"><label for="hourlyRate">Hourly Rate ($):</label>
-    <input class="inputbox"  id="hourlyRate">
+    <input class="inputbox" id="hourlyRate">
   </div>
-  <div class="c-div"><button class="button-macos" id="startBtn">Start</button>
-    <button class="button-macos" id="stopBtn">Stop</button>
-    <button class="button-macos" id="resetBtn">Reset</button>
-  </div>
-  <div class="c-div">
-    <div id="timer">0:00:00</div>
+  <div class="c-div"><button class="button" id="startBtn">Start</button>
+    <button class="button" id="resetBtn">Log and reset</button>
   </div>
   <div class="c-div">
-    <div id="earnings">$0.00</div>
+    <span id="timer">0:00:00</span> <span id="earnings">$0.00</span>
+  </div>
+
+  <div class="c-div">
+    <br>Session log:
+    <div id="entryListDiv">Nothing yet.</div>
   </div>
 
   <script>
@@ -121,16 +142,15 @@
     let earnings = 0;
     let hourlyRate = 0;
     let isTimerRunning = false;
+    const entryList = [];
 
     const timerDisplay = document.getElementById('timer');
     const earningsDisplay = document.getElementById('earnings');
     const startBtn = document.getElementById('startBtn');
-    const stopBtn = document.getElementById('stopBtn');
     const resetBtn = document.getElementById('resetBtn');
     const hourlyRateInput = document.getElementById('hourlyRate');
 
     startBtn.addEventListener('click', startStopTimer);
-    stopBtn.addEventListener('click', startStopTimer);
     resetBtn.addEventListener('click', resetTimer);
     hourlyRateInput.addEventListener('input', updateHourlyRate);
 
@@ -152,7 +172,6 @@
       timerInterval = setInterval(updateTimer, 1000);
       isTimerRunning = true;
       startBtn.textContent = 'Pause';
-      stopBtn.disabled = false;
       hourlyRateInput.disabled = true;
     }
 
@@ -177,21 +196,52 @@
     }
 
     function resetTimer() {
-      clearInterval(timerInterval);
-      timerDisplay.textContent = '0:00:00';
-      earningsDisplay.textContent = '$0.00';
-      elapsedTime = 0;
-      earnings = 0;
-      isTimerRunning = false;
-      startBtn.textContent = 'Start';
-      startBtn.disabled = false;
-      stopBtn.disabled = true;
-      hourlyRateInput.disabled = false;
-    }
+      // Store the earnings entry if it's greater than 0
+      if (earnings > 0) {
+        entryList.push(earnings);
+        // Call sum calculation
+        calculateSum();
+        // Show the entry list
+        showEntryList();
+      }
 
-    function updateEarningsDisplay() {
-      earningsDisplay.textContent = `$${earnings.toFixed(2)}`;
-    }
+
+        clearInterval(timerInterval);
+        timerDisplay.textContent = '0:00:00';
+        earningsDisplay.textContent = '$0.00';
+        elapsedTime = 0;
+        earnings = 0;
+        isTimerRunning = false;
+        startBtn.textContent = 'Start';
+        startBtn.disabled = false;
+        hourlyRateInput.disabled = false;
+        // Clear the entry list
+        // entryList.length = 0;
+
+      }
+
+      function updateEarningsDisplay() {
+        earningsDisplay.textContent = `$${earnings.toFixed(2)}`;
+      }
+
+      function calculateSum() {
+        const todaySum = entryList.reduce((total, entry) => total + entry, 0);
+        const runningTotalDiv = document.getElementById('runningtotal');
+        runningTotalDiv.textContent = `$${todaySum.toFixed(2)}`;
+      }
+
+      function showEntryList() {
+        const entryListDiv = document.getElementById('entryListDiv');
+        entryListDiv.innerHTML = ''; // Clear previous entries
+
+        entryList.forEach((entry, index) => {
+          const entryItem = document.createElement('div');
+          entryItem.textContent = `Project ${index + 1}: $${entry.toFixed(2)}`;
+          entryListDiv.appendChild(entryItem);
+        });
+      }
+
+
   </script>
 </body>
 
