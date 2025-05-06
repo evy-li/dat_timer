@@ -2,270 +2,254 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dat_timer</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
-        @import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dat_timer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
+    @import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
 
-        .martian-mono-dingus {
-            font-family: "Martian Mono", monospace;
-            font-optical-sizing: auto;
-            font-weight: <weight>;
-            font-style: normal;
-            font-variation-settings:
-                "wdth" 100;
-        }
+    body,
+    html {
+      font-family: 'Martian Mono', monospace;
+      font-size: 1em;
+      color: white;
+      background-color: black;
+      line-height: 2;
+      margin: 0;
+    }
 
-        body,
-        html {
-            font-family: 'Martian Mono', monospace;
-            font-size: 1em;
-            color: white;
-            background-color: black;
-            line-height: 2;
-            margin: 0;
-        }
+    .c-div {
+      display: block;
+      height: 2em;
+      text-align: center;
+      padding: 1em;
+    }
 
-        .c-div {
-            display: block;
-            height: 2em;
-            text-align: center;
-            padding: 1em;
-        }
+    .c2-div {
+      display: block;
+      height: 2em;
+      font-size: 3em;
+      color: black;
+      text-align: center;
+      padding: 0.2em;
+      margin: 0;
+      background-color: rgba(84, 151, 255, 1);
+    }
 
-        .c2-div {
-            display: block;
-            height: 2em;
-            font-family: 'Martian Mono', monospace;
-            font-size: 3em;
-            color: black;
-            text-align: center;
-            padding: 0.2em;
-            margin: 0;
-            background-color: rgba(84, 151, 255, 1);
-        }
+    #timer {
+      font-size: 2em;
+    }
 
-        #timer {
-            font-size: 2em;
-        }
+    #earnings {
+      font-size: 2em;
+      color: rgba(84, 151, 255, 1);
+    }
 
-        #earnings {
-            font-size: 2em;
-            color: rgba(84, 151, 255, 1);
-            ;
-        }
+    .button {
+      padding: 0.5em 1em;
+      font-family: 'Martian Mono', monospace;
+      font-size: 1em;
+      border-radius: 0.5em;
+      color: rgba(84, 151, 255, 1);
+      background-color: rgb(37, 37, 37);
+      border: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
 
-        .button {
-            padding: 0.5em 1em;
-            font-family: 'Martian Mono', monospace;
-            font-size: 1em;
-            border-radius: 0.5em;
-            color: rgba(84, 151, 255, 1);
-            background-color: rgb(37, 37, 37);
-            border: none;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            overflow: hidden;
-        }
+    .button:hover,
+    .button:focus {
+      background-color: rgba(84, 151, 255, 1);
+      color: black;
+      outline: none;
+    }
 
-        .button:hover {
-            background-color: rgba(84, 151, 255, 1);
-            color: black;
-            overflow: hidden;
-        }
+    .inputbox {
+      padding: 0.5em 1em;
+      width: 5em;
+      font-family: 'Martian Mono', monospace;
+      font-size: 1em;
+      text-align: center;
+      border-radius: 0.5em;
+      color: rgba(84, 151, 255, 1);
+      background-color: rgb(37, 37, 37);
+      border: none;
+      outline: none;
+    }
 
-        .button:focus {
-            background-color: rgba(84, 151, 255, 1);
-            color: black;
-            outline: none;
-            overflow: hidden;
-        }
+    .inputbox:hover,
+    .inputbox:focus {
+      background-color: rgba(84, 151, 255, 1);
+      color: black;
+      outline: none;
+    }
 
-        .inputbox {
-            padding: 0.5em 1em;
-            width: 5em;
-            font-family: 'Martian Mono', monospace;
-            font-size: 1em;
-            text-align: center;
-            border-radius: 0.5em;
-            color: rgba(84, 151, 255, 1);
-            background-color: rgb(37, 37, 37);
-            border: none;
-            outline: none;
-            overflow: hidden;
-            resize: none;
-        }
-
-        .inputbox:hover {
-            background-color: rgba(84, 151, 255, 1);
-            color: black;
-            outline: none;
-            overflow: hidden;
-        }
-
-        .inputbox:focus {
-            background-color: rgba(84, 151, 255, 1);
-            color: black;
-            outline: none;
-            overflow: hidden;
-        }
-
-        .sp1 {
-
-            display: inline-block;
-            background: rgb(2, 0, 36);
-            background: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, rgba(84, 151, 255, 0.3) 100%);
-            border-style: solid;
-            border-width: 1px;
-            border-color: rgba(84, 151, 255, 1);
-            border-radius: 1em;
-            padding-top: 0.3em;
-            padding-bottom: 0.3em;
-            padding-left: 1.5em;
-            padding-right: 1.5em;
-            margin: 1em;
-        }
-    </style>
+    .sp1 {
+      display: inline-block;
+      background: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, rgba(84, 151, 255, 0.3) 100%);
+      border: 1px solid rgba(84, 151, 255, 1);
+      border-radius: 1em;
+      padding: 0.3em 1.5em;
+      margin: 1em;
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="c2-div">
-        <div id="runningtotal">
-            🤑
-        </div>
-    </div>
+  <div class="c2-div">
+    <div id="runningtotal">🤑</div>
+  </div>
 
-    <div class="c-div">
-        <label for="hourlyRate">Hourly Rate [$]</label>
-        <input class="inputbox" id="hourlyRate">
-    </div>
-    <div class="c-div"><button class="button" id="startBtn">Start</button>
-        <button class="button" id="resetBtn">Log and reset</button>
-    </div>
-    <div class="c-div">
-        <span id="timer">0:00:00</span> <span id="earnings">$0.00</span>
-    </div>
+  <div class="c-div">
+    <label for="hourlyRate">Hourly Rate [$]</label>
+    <input class="inputbox" id="hourlyRate">
+  </div>
 
-    <div class="c-div">
-        <span class="sp1">Session log</span>
-        <div id="entryListDiv">Nothing yet.</div>
-    </div>
+  <div class="c-div">
+    <button class="button" id="startBtn">Start</button>
+    <button class="button" id="resetBtn">Log and reset</button>
+  </div>
 
-    <script>
-        let timerInterval;
-        let startTime;
-        let elapsedTime = 0;
-        let earnings = 0;
-        let hourlyRate = 0;
-        let isTimerRunning = false;
-        const entryList = [];
+  <div class="c-div">
+    <span id="timer">0:00:00</span> <span id="earnings">$0.00</span>
+  </div>
 
-        const timerDisplay = document.getElementById('timer');
-        const earningsDisplay = document.getElementById('earnings');
-        const startBtn = document.getElementById('startBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const hourlyRateInput = document.getElementById('hourlyRate');
+  <div class="c-div">
+    <span class="sp1">Session log</span>
+    <div id="entryListDiv">Nothing yet.</div>
+  </div>
 
-        startBtn.addEventListener('click', startStopTimer);
-        resetBtn.addEventListener('click', resetTimer);
-        hourlyRateInput.addEventListener('input', updateHourlyRate);
+  <script>
+    // Timer and earnings logic
 
-        function updateHourlyRate() {
-            hourlyRate = parseFloat(hourlyRateInput.value);
-            updateEarningsDisplay();
-        }
+    // State variables
+    let timerInterval;             // ID of the interval used to update the timer
+    let startTime;                 // Timestamp when the timer started
+    let elapsedTime = 0;           // Total time elapsed (in ms)
+    let earnings = 0;              // Current session earnings
+    let hourlyRate = 0;            // Hourly rate input by user
+    let isTimerRunning = false;    // Boolean flag to track if timer is running
+    const entryList = [];          // Stores logged sessions
 
-        function startStopTimer() {
-            if (!isTimerRunning) {
-                startTimer();
-            } else {
-                stopTimer();
-            }
-        }
+    // DOM references
+    const timerDisplay = document.getElementById('timer');
+    const earningsDisplay = document.getElementById('earnings');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const hourlyRateInput = document.getElementById('hourlyRate');
+    const entryListDiv = document.getElementById('entryListDiv');
+    const runningTotalDiv = document.getElementById('runningtotal');
 
-        function startTimer() {
-            startTime = Date.now() - elapsedTime;
-            timerInterval = setInterval(updateTimer, 1000);
-            isTimerRunning = true;
-            startBtn.textContent = 'Pause';
-            hourlyRateInput.disabled = true;
-        }
+    // Event listeners
+    startBtn.addEventListener('click', startStopTimer);
+    resetBtn.addEventListener('click', resetTimer);
+    hourlyRateInput.addEventListener('input', updateHourlyRate);
 
-        function updateTimer() {
-            const currentTime = Date.now();
-            elapsedTime = currentTime - startTime;
-            const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-            const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-            const formattedTime = `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    // Parse and update hourly rate
+    function updateHourlyRate() {
+      const value = parseFloat(hourlyRateInput.value);
+      hourlyRate = isNaN(value) || value < 0 ? 0 : value;
+      updateEarningsDisplay();
+    }
 
-            earnings = (elapsedTime / (1000 * 60 * 60)) * hourlyRate;
-            updateEarningsDisplay();
-            timerDisplay.textContent = formattedTime;
-        }
+    // Toggle between starting and stopping the timer
+    function startStopTimer() {
+      if (isTimerRunning) {
+        stopTimer();
+      } else {
+        startTimer();
+      }
+    }
 
-        function stopTimer() {
-            clearInterval(timerInterval);
-            isTimerRunning = false;
-            startBtn.textContent = 'Start';
-            hourlyRateInput.disabled = false;
-        }
+    // Start the timer
+    function startTimer() {
+      startTime = Date.now() - elapsedTime; // Continue from where it left off
+      timerInterval = setInterval(updateTimer, 1000);
+      isTimerRunning = true;
+      startBtn.textContent = 'Pause';
+      hourlyRateInput.disabled = true;
+    }
 
-        function resetTimer() {
-            // Store the earnings and elapsed time if they're greater than 0
-            if (earnings > 0 || elapsedTime > 0) {
-                entryList.push({ earnings: earnings, time: elapsedTime });
-                // Call sum calculation for earnings
-                calculateSum();
-                // Show the entry list
-                showEntryList();
-            }
+    // Stop the timer
+    function stopTimer() {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+      startBtn.textContent = 'Start';
+      hourlyRateInput.disabled = false;
+    }
 
-            // Reset timer and earnings display
-            clearInterval(timerInterval);
-            timerDisplay.textContent = '0:00:00';
-            earningsDisplay.textContent = '$0.00';
-            elapsedTime = 0;
-            earnings = 0;
-            isTimerRunning = false;
-            startBtn.textContent = 'Start';
-            startBtn.disabled = false;
-            hourlyRateInput.disabled = false;
-        }
+    // Reset timer and log the session
+    function resetTimer() {
+      if (earnings > 0 || elapsedTime > 0) {
+        entryList.push({ earnings, time: elapsedTime });
+        calculateSum();
+        showEntryList();
+      }
 
-        function updateEarningsDisplay() {
-            earningsDisplay.textContent = `$${earnings.toFixed(2)}`;
-        }
+      clearInterval(timerInterval);
+      timerDisplay.textContent = '0:00:00';
+      earningsDisplay.textContent = '$0.00';
+      elapsedTime = 0;
+      earnings = 0;
+      isTimerRunning = false;
+      startBtn.textContent = 'Start';
+      hourlyRateInput.disabled = false;
+    }
 
-        function calculateSum() {
-            const todaySum = entryList.reduce((total, entry) => total + entry.earnings, 0);
-            const runningTotalDiv = document.getElementById('runningtotal');
-            runningTotalDiv.textContent = `$${todaySum.toFixed(2)}`;
-        }
+    // Update timer display and earnings
+    function updateTimer() {
+      const currentTime = Date.now();
+      elapsedTime = currentTime - startTime;
 
-        function showEntryList() {
-            const entryListDiv = document.getElementById('entryListDiv');
-            entryListDiv.innerHTML = ''; // Clear previous entries
+      const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+      const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+      timerDisplay.textContent = `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-            entryList.forEach((entry, index) => {
-                const entryItem = document.createElement('div');
-                entryItem.textContent = `Session ${index + 1} – Earnings $${entry.earnings.toFixed(2)}, Time ${formatTime(entry.time)}`;
-                entryListDiv.appendChild(entryItem);
-            });
-        }
+      const newEarnings = (elapsedTime / (1000 * 60 * 60)) * hourlyRate;
+      if (Math.abs(newEarnings - earnings) > 0.01) {
+        earnings = newEarnings;
+        updateEarningsDisplay();
+      }
+    }
 
-        function formatTime(milliseconds) {
-            const hours = Math.floor(milliseconds / (1000 * 60 * 60));
-            const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
-            return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
+    // Update the dollar value shown
+    function updateEarningsDisplay() {
+      earningsDisplay.textContent = `$${earnings.toFixed(2)}`;
+    }
 
-    </script>
+    // Sum all session earnings and update total display
+    function calculateSum() {
+      const todaySum = entryList.reduce((total, entry) => total + entry.earnings, 0);
+      runningTotalDiv.textContent = `$${todaySum.toFixed(2)}`;
+    }
+
+    // Render a list of past sessions
+    function showEntryList() {
+      entryListDiv.innerHTML = '';
+      if (entryList.length === 0) {
+        entryListDiv.textContent = 'Nothing yet.';
+        return;
+      }
+
+      entryList.forEach((entry, index) => {
+        const entryItem = document.createElement('div');
+        entryItem.textContent = `Session ${index + 1} – Earnings $${entry.earnings.toFixed(2)}, Time ${formatTime(entry.time)}`;
+        entryListDiv.appendChild(entryItem);
+      });
+    }
+
+    // Format milliseconds into a time string
+    function formatTime(milliseconds) {
+      const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+      const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
+      return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+  </script>
 </body>
 
 </html>
